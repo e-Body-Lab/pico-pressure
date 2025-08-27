@@ -16,7 +16,7 @@ In the full featured version, the Raspberry Pi Pico 2 W creates its own wifi net
 |                      | | |
 | `pico-debug-tools` |  | VS Code project with debugging code examples for the Pico |
 |    | `blink.py` | Simple blinking example of the on-board LED to verify the Pico is functioning |
-|    | `simpleaccesspoint.py` | Simple example of pico acting as an accesspoint, creating a wifi network, and serving a simple webpage |
+|    | `web-server.py` | Simple example of pico acting as an accesspoint, creating a wifi network, and serving a simple webpage with two-way communication |
 | `arduino-debug-tools` | | Arduino and Processing sketches for verifying the circuit works |
 |    | `general_pressure_arduino.ino` | Arduino sketch to measure the pressure change |
 |    | `general_pressure_processing.pde` | Processing sketch to visualise pressure change |
@@ -41,7 +41,7 @@ This project is developed for the [Raspberry Pi Pico 2 W](https://www.raspberryp
 Code examples to isolate the different aspects of the system for debugging.
 * `blink.py` - Blinks the on-boad LED on and off. Code example to determine that the Pico board is working as expected and code can be uploaded from a computer.
 
-* `simpleaccesspoint.py` - Creates a wifi accesspoint from the Pico. From a laptop connect to the network name `Pico2W` using the password `password`. Both the network name and password can be changed in the last two lines of the Python file.
+* `web_server.py` - Creates a wifi accesspoint from the Pico. From a laptop connect to the network name `Pico2W` using the password `password`. Both the network name and password can be changed in the last two lines of the Python file.
 
 ## Arduino Debugging
 Code examples for using an Arduino and Processing to visualise the pressure changes.
