@@ -41,7 +41,7 @@ This project is developed for the [Raspberry Pi Pico 2 W](https://www.raspberryp
 Code examples to isolate the different aspects of the system for debugging.
 * `blink.py` - Blinks the on-boad LED on and off. Code example to determine that the Pico board is working as expected and code can be uploaded from a computer.
 
-* `web_server.py` - Creates a wifi accesspoint from the Pico. From a laptop connect to the network name `Pico2W` using the password `password`. Both the network name and password can be changed in the last two lines of the Python file.
+* `web_server.py` - Creates a wifi accesspoint from the Pico. From a laptop connect to the network name `Pico2W` using the password `password`. Both the network name and password can be changed in the last two lines of the Python file. Be sure to disconnect your wifi device from the Pico 2W network before trying to run the server again.
 
 ## Arduino Debugging
 Code examples for using an Arduino and Processing to visualise the pressure changes.
