@@ -6,19 +6,20 @@ This repository is a set of tools to support piezoresistive pressure sensing.
 
 In the full featured version, the Raspberry Pi Pico 2 W creates its own wifi network as an access point and serves a website to any connecting devices that displays the current pressure detected.
 
-It also contains debugging examples to print the raw sensor data via the USB connection without involving wifi. 
 
 ## Directory of Resources
 | Folder | Filename | Description |
 | ----------- | - |----------- |
-| pico-pressure-single |  | VS Code project for sensing a single pressure sensor |
+| `pico-pressure-single` |  | VS Code project for sensing a single pressure sensor |
 |                      | | |
-| pico-debug-tools |  | VS Code project with debugging code examples for the Pico |
-|    | blink.py | Simple blinking example of the on-board LED to verify the Pico is functioning |
-|    | simpleaccesspoint.py | Simple example of pico acting as an accesspoint, creating a wifi network, and serving a simple webpage |
-| arduino-debug-tools | | Arduino and Processing sketches for verifying the circuit works |
-|    | general_pressure_arduino.ino | Arduino sketch to measure the pressure change |
-|    | general_pressure_processing.pde | Processing sketch to visualise pressure change |
+| `pico-pressure-matrix` |  | VS Code project for sensing a pressure matrix |
+|                      | | |
+| `pico-debug-tools` |  | VS Code project with debugging code examples for the Pico |
+|    | `blink.py` | Simple blinking example of the on-board LED to verify the Pico is functioning |
+|    | `simpleaccesspoint.py` | Simple example of pico acting as an accesspoint, creating a wifi network, and serving a simple webpage |
+| `arduino-debug-tools` | | Arduino and Processing sketches for verifying the circuit works |
+|    | `general_pressure_arduino.ino` | Arduino sketch to measure the pressure change |
+|    | `general_pressure_processing.pde` | Processing sketch to visualise pressure change |
 
 # Set Up
 This project is developed for the [Raspberry Pi Pico 2 W](https://www.raspberrypi.com/products/raspberry-pi-pico-2/). It will not work on another board without significant modification.
