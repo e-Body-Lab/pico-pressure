@@ -27,11 +27,11 @@ led_pin = Pin("LED", Pin.OUT)
 pressure_pin = ADC(Pin(26))
 pressure_max = 65535
 
-def webpage(sensor_value, square_color):
+def webpage():
     '''
     Returns webpage to be served.
     '''
-    html = f"""<!DOCTYPE html>
+    html = """<!DOCTYPE html>
 <html>
 <head>
 <title>Pico Pressure Single Channel</title>
@@ -41,20 +41,25 @@ def webpage(sensor_value, square_color):
 Sorry, your browser does not support canvas.
 </canvas>
 <script>
-let sensorData = "/sensors?"
+let sensorData = "/sensors?";
 fetch (sensorData)
-.then(x => x.text())
-.then(y => document.getElementById("description").innerHTML = y);
+.then(response => response.json())
+.then(sensors => myDisplay(sensors));
+
+function myDisplay(data) {
+    const j = JSON.parse(data);
+    document.getElementById("description").innerHTML = "test";
+}
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-ctx.fillStyle = {square_color};
+ctx.fillStyle = "rgb(60 255 0 / 50%)";
 ctx.fillRect(10,10,880,480);
 </script>
 
 
 <h1>Single Channel Pressure Sensor</h1>
-<p id="description">Pressure sensor is {sensor_value}</p>
+<p id="description">Pressure sensor is X</p>
 <form action="./close">
     <input type="submit" value="Shut down server" />
 </form>
@@ -74,16 +79,16 @@ def get_sensors():
     '''
     Returns json object of most recent sensor readings.
     '''
+    # get current sensor value
+    pressure_value = pressure_pin.read_u16()/pressure_max
     # create json serialisation
-    sensors_json = json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
+    sensors_json = json.dumps([{"sensor1": pressure_value }])
     return sensors_json
 
 def serve(connection):
     '''
     Starts up the server for serving the webpage.
     '''
-    # displayed color in the webpage
-    color = '\"rgb(60 255 0 / 50%)\"'
     # start with turning the LED on
     led_pin.on()
 
@@ -93,7 +98,6 @@ def serve(connection):
         client = connection.accept()[0]
         request = client.recv(1024)
         request = str(request)
-        pressure_value = pressure_pin.read_u16()/pressure_max
         # print for debugging
         print(request)
         try:
@@ -107,7 +111,7 @@ def serve(connection):
         elif request == '/close?':
             sys.exit()
         else:
-            html = webpage(pressure_value, color)
+            html = webpage()
             client.send(html)
             client.close()
 

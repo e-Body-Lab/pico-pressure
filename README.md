@@ -33,7 +33,7 @@ This project is developed for the [Raspberry Pi Pico 2 W](https://www.raspberryp
 # Running the code
 1. Open the Python file to be run in VS Code with the Pico board connected to the laptop. 
 2. The bottom status bar VS Code should show that the Pico is Connected. Click on the Run button.
-3. Click on the Stop button to stop the code.
+3. Click on the Stop button to stop the code. 
 
 
 # Debugging tools
