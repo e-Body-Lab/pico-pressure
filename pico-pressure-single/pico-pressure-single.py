@@ -20,6 +20,7 @@ from time import sleep
 from machine import ADC, Pin
 import rp2
 import sys
+import json
 
 # global variables for the pin with the on-board LED and sensor pin
 led_pin = Pin("LED", Pin.OUT)
@@ -27,11 +28,12 @@ pressure_pin = ADC(Pin(26))
 pressure_max = 65535
 
 def webpage(sensor_value, square_color):
-    #Template HTML
+    '''
+    Returns webpage to be served.
+    '''
     html = f"""<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="refresh" content="5">
 <title>Pico Pressure Single Channel</title>
 </head>
 <body>
@@ -39,6 +41,11 @@ def webpage(sensor_value, square_color):
 Sorry, your browser does not support canvas.
 </canvas>
 <script>
+let sensorData = "/sensors?"
+fetch (sensorData)
+.then(x => x.text())
+.then(y => document.getElementById("description").innerHTML = y);
+
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 ctx.fillStyle = {square_color};
@@ -47,7 +54,7 @@ ctx.fillRect(10,10,880,480);
 
 
 <h1>Single Channel Pressure Sensor</h1>
-<p>Pressure sensor is {sensor_value}</p>
+<p id="description">Pressure sensor is {sensor_value}</p>
 <form action="./close">
     <input type="submit" value="Shut down server" />
 </form>
@@ -62,6 +69,14 @@ def start_sensing():
     sensor reading at start is taken to be the maximum value.
     '''
     return pressure_pin.read_u16()
+
+def get_sensors():
+    '''
+    Returns json object of most recent sensor readings.
+    '''
+    # create json serialisation
+    sensors_json = json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
+    return sensors_json
 
 def serve(connection):
     '''
@@ -85,11 +100,16 @@ def serve(connection):
             request = request.split()[1]
         except IndexError:
             pass
-        if request == '/close?':
+        if request == '/sensors?':
+            data = get_sensors()
+            client.send(data)
+            client.close()
+        elif request == '/close?':
             sys.exit()
-        html = webpage(pressure_value, color)
-        client.send(html)
-        client.close()
+        else:
+            html = webpage(pressure_value, color)
+            client.send(html)
+            client.close()
 
 
 def connect(ssid, password):
