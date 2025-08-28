@@ -46,4 +46,4 @@ Code examples to isolate the different aspects of the system for debugging.
 ## Arduino Debugging
 Code examples for using an Arduino and Processing to visualise the pressure changes.
 * `general_pressure_arduino.ino` - Arduino sketch that reads in from a 3 x 4 matrix pressure sensor and prints the values over Serial.
-* `general_pressure_processing.pde` - Processing sketch that displays the values from the Arduino in a grid that changes colour according to the pressure applied.
+* `general_pressure_processing.pde` - Processing sketch that displays the values from the Arduino in a grid that changes colour according to the pressure applied. Can also be used with the Arduino example `AnalogReadSerial` if using only a single channel of pressure sensing. See the instructions at the top of the Processing sketch.
