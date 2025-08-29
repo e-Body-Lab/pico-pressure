@@ -1,7 +1,12 @@
 /*
  general_pressure_processing
  
- To be paired with general_pressure_arduino.ino
+ To be paired with general_pressure_arduino.ino for a grid.
+ Can be paired with the Arduino Example AnalogReadSerial for
+ a single sensor.
+ 
+ If using with a single sensor, change the numRows and numCols 
+ to both be equal to 1.
  
  Visualizes values sent by Arduino by drawing a grid using 
  grayscale shading of each square to represent sensor value.
